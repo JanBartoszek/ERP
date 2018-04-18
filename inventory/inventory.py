@@ -164,6 +164,8 @@ def update(table, id_):
 # return type: list of lists (the inner list contains the whole row with their actual data types)
 #
 # @table: list of lists
+
+
 def get_available_items(table):
     now = datetime.datetime.now()
     current_year=now.year
@@ -173,9 +175,7 @@ def get_available_items(table):
             not_overdue.append(item)
     return not_overdue    
 
-    # your code
-
-    pass
+    
 
 
 # the question: What are the average durability times for each manufacturer?
@@ -183,12 +183,19 @@ def get_available_items(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-    durab=0
-    for item in table:
-        durab+=int(item[4])
-    result= durab/len(table)
-    return result 
-
-    # your code
-
-    pass
+    manufactures = set([row[2] for row in table])
+    manufactures = list(manufactures)
+    result = {}
+    item_of_items = []
+    for item in manufactures:
+        item = [int(row[4]) for row in table if row[2] == item]
+        item_of_items.append(item) 
+    avg_durability = []
+    for listofavg in item_of_items:
+        suma = 0
+        for elem in listofavg:
+            suma += elem
+            suma = suma / len(listofavg)
+        avg_durability.append(suma)
+    result = {manufactures[i]: avg_durability[i] for i in range (0, len(manufactures))}
+    return result
