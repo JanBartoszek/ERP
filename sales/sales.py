@@ -181,25 +181,35 @@ def get_lowest_price_item_id(table):
         if item[1] == best_title:
             return(item[0])
 
+
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
-
     # your code
-    
-    #tH34Jl#&;Age of Wonders: Shadow Magic;40;8;12;2015
-    
-    for item in table:
-        if item[5] < year_from:
-            table.remove(item)
-        else:
-            if item[3] < month_from:
-                table.remove(item)
-            else: 
-                if item[4] >= day_from:
+    table_from_to = []
 
-            and  
-            and item[4] >= day_from) is False or (item[5] <= year_to and item[3] <= month_to and item[4] <= day_to) is False:
-            table.remove(item)
-        
-    return table
+    for item in table:
+        if int(item[5]) > year_from:
+            table_from_to.append(item)
+        elif int(item[5]) == year_from:
+            if int(item[3]) > month_from:
+                table_from_to.append(item)
+            elif int(item[3]) == month_from:
+                if int(item[4]) >= day_from:
+                    table_from_to.append(item)
+
+    for item in table_from_to:
+        if int(item[5]) > year_to:
+            table_from_to.remove(item)
+        elif int(item[5]) == year_to:
+            if int(item[3]) > month_to:
+                table_from_to.remove(item)
+            elif int(item[3]) == month_to:
+                if int(item[4]) >= day_to:
+                    table_from_to.remove(item)
+    
+    for list1 in table_from_to:
+        for i in range(2,6): 
+            list1[i] = int(list1[i])
+    
+    return table_from_to
