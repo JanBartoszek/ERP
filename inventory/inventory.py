@@ -168,14 +168,19 @@ def update(table, id_):
 
 def get_available_items(table):
     now = datetime.datetime.now()
-    current_year=now.year
-    not_overdue=[]
-    for item in table:
-        if (int(item[3])+int(item[4]))>= int(current_year):
-            not_overdue.append(item)
-    return not_overdue    
-
+    current_year = now.year - 1
     
+    not_overdue = []
+    for item in table:
+        if (int(item[3])+int(item[4])) >= int(current_year):
+            not_overdue.append(item)
+    
+    for item in not_overdue:
+        for item2 in range(3, 5):
+            item[item2] = int(item[item2])
+    
+    return not_overdue  
+
 
 
 # the question: What are the average durability times for each manufacturer?
