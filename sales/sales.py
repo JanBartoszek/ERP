@@ -36,7 +36,7 @@ def start_module():
                         "Update",
                         "Get_lowest_price_item_id",
                         "Get_items_sold_between"]
-    
+
         ui.print_menu("Sales", list_options, "Back to main")
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -47,25 +47,25 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 update(table, id_)
             elif option == "5":
                 result = get_lowest_price_item_id(table)
                 label = "Id of the item that was sold for the lowest price is: "
                 ui.print_result(result, label)
             elif option == "6":
-                input1 = ui.get_inputs(["month", "day", "year"],"Enter first date")
+                input1 = ui.get_inputs(["month", "day", "year"], "Enter first date")
                 month_from = input1[0]
                 day_from = input1[1]
                 year_from = input1[2]
-                input2 = ui.get_inputs(["month", "day", "year"],"Enter second date")
+                input2 = ui.get_inputs(["month", "day", "year"], "Enter second date")
                 month_to = input2[0]
                 day_to = input2[1]
                 year_to = input2[2]
-                
+
                 result = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
                 label = "Items sold between dates: "
                 ui.print_result(result, label)
@@ -91,7 +91,7 @@ def show_table(table):
 
     # your code
     title_list = ['id_', 'title', 'price', 'month', 'day', 'year']
-    
+
     ui.print_table(table, title_list)
     pass
 
@@ -108,10 +108,10 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['title', 'price', 'month', 'day', 'year'],"Please provide your personal information")
+    user_input = ui.get_inputs(['title', 'price', 'month', 'day', 'year'], "Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
-    table += [new_record] 
+    table += [new_record]
     data_manager.write_table_to_file('sales/sales.csv', table)
     return table
 
@@ -150,7 +150,7 @@ def update(table, id_):
     """
 
     # your code
-    user_input = ui.get_inputs(['title', 'price', 'month', 'day', 'year'],"Please provide information")
+    user_input = ui.get_inputs(['title', 'price', 'month', 'day', 'year'], "Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:
@@ -207,9 +207,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
             elif int(item[3]) == month_to:
                 if int(item[4]) >= day_to:
                     table_from_to.remove(item)
-    
+
     for list1 in table_from_to:
-        for i in range(2,6): 
+        for i in range(2, 6):
             list1[i] = int(list1[i])
-    
+
     return table_from_to
