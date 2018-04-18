@@ -36,7 +36,7 @@ def start_module():
                         "Update",
                         "Which_year_max",
                         "Avg_amount"]
-    
+
         ui.print_menu("Accounting manager", list_options, "Back to main")
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -47,19 +47,20 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 update(table, id_)
             elif option == "5":
                 result = which_year_max(table)
                 label = "Highest profit year"
-                ui.print_result(result,label)
+                ui.print_result(result, label)
             elif option == "6":
-                year = "2016","2015"
+                year = ui.get_inputs(["Enter year"], "")[0]
                 result = avg_amount(table, year)
-                ui.print_result(result, year)
+                label = "Average profit per item in given year"
+                ui.print_result(result, label)
             elif option == "0":
                 break
             else:
@@ -83,7 +84,7 @@ def show_table(table):
 
     # your code
     title_list = ['id_', 'month', 'day', 'year', 'type', 'amount']
-    
+
     ui.print_table(table, title_list)
     pass
 
@@ -100,10 +101,10 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'],"Please provide your personal information")
+    user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'], "Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
-    table += [new_record] 
+    table += [new_record]
     data_manager.write_table_to_file('accounting/items.csv', table)
     return table
 
@@ -142,7 +143,7 @@ def update(table, id_):
     """
 
     # your code
-    user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'],"Please provide information")
+    user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'], "Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:
@@ -162,10 +163,10 @@ def which_year_max(table):
     newest_year = 0
     for position in table:
         if int(position[3]) > int(newest_year):
-            newest_year = position [3]
+            newest_year = position[3]
     else:
         pass
-    years=[]
+    years = []
     for position in table:
         if not position[3] in years:
             years.append(position[3])
@@ -184,56 +185,27 @@ def which_year_max(table):
             highest_profit = profit
         else:
             pass
-    i=0
-    for profit in  profit_per_year:
+    i = 0
+    for profit in profit_per_year:
         if profit == highest_profit:
-            result = years [i]
-            return result 
+            result = years[i]
+            return int(result)
         else:
-            i+=1
-
-        
-    # your code
-
-    pass
+            i += 1
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
-    
+
     # your code
-    sum_in_2016 = 0
-    sum_out_2016 = 0
-    sum_in_2015 = 0
-    sum_out_2015 = 0
-    count_year_2015 = 0
-    count_year_2016 = 0
-    for item1 in table:
-        for item2 in item1:
-            if item2 == "2016":
-                count_year_2016 += 1
-                if item1[4] == "in":
-                    item1[5] = int(item1[5])
-                    sum_in_2016 = sum_in_2016 + item1[5]
-                else:
-                    item1[5] = int(item1[5])
-                    sum_out_2016 = sum_out_2016 + item1[5]
-            elif item2 == "2015":
-                count_year_2015 += 1
-                if item1[4] == "in":
-                    item1[5] = int(item1[5])
-                    sum_in_2015 = sum_in_2015 + item1[5]
-                else:
-                    item1[5] = int(item1[5])
-                    sum_out_2015 = sum_out_2015 + item1[5]
-
-    profit_2016 = (sum_in_2016) - (sum_out_2016)
-    profit_2015 = (sum_in_2015) - (sum_out_2015)
-    print(profit_2015)
-
-    avg_profit_2016 = (profit_2016) / (count_year_2016)
-    avg_profit_2015 = (profit_2015) / (count_year_2015)
-
-    return avg_profit_2016 , avg_profit_2015
-    pass
+    money = 0
+    items_counter = 0
+    for item in table:
+        if int(item[3]) == int(year):
+            items_counter += 1
+            if item[4] == 'in':
+                money += int(item[5])
+            else:
+                money -= int(item[5])
+    return money/items_counter
