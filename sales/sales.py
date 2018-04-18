@@ -189,23 +189,23 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     table_from_to = []
 
     for item in table:
-        if int(item[5]) > year_from:
+        if int(item[5]) > int(year_from):
             table_from_to.append(item)
-        elif int(item[5]) == year_from:
-            if int(item[3]) > month_from:
+        elif int(item[5]) == int(year_from):
+            if int(item[3]) > int(month_from):
                 table_from_to.append(item)
-            elif int(item[3]) == month_from:
-                if int(item[4]) >= day_from:
+            elif int(item[3]) == int(month_from):
+                if int(item[4]) > int(day_from):
                     table_from_to.append(item)
 
     for item in table_from_to:
-        if int(item[5]) > year_to:
+        if int(item[5]) > int(year_to):
             table_from_to.remove(item)
-        elif int(item[5]) == year_to:
-            if int(item[3]) > month_to:
+        elif int(item[5]) == int(year_to):
+            if int(item[3]) > int(month_to):
                 table_from_to.remove(item)
-            elif int(item[3]) == month_to:
-                if int(item[4]) >= day_to:
+            elif int(item[3]) == int(month_to):
+                if int(item[4]) >= int(day_to):
                     table_from_to.remove(item)
 
     for list1 in table_from_to:
