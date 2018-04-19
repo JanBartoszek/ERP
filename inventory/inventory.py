@@ -148,7 +148,7 @@ def update(table, id_):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'],"Please provide information")
+    user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'], "Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:
@@ -169,18 +169,17 @@ def update(table, id_):
 def get_available_items(table):
     now = datetime.datetime.now()
     current_year = now.year - 1
-    
+
     not_overdue = []
     for item in table:
         if (int(item[3])+int(item[4])) >= int(current_year):
             not_overdue.append(item)
-    
+
     for item in not_overdue:
         for item2 in range(3, 5):
             item[item2] = int(item[item2])
-    
-    return not_overdue  
 
+    return not_overdue
 
 
 # the question: What are the average durability times for each manufacturer?
@@ -188,19 +187,16 @@ def get_available_items(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-    manufactures = set([row[2] for row in table])
-    manufactures = list(manufactures)
-    result = {}
-    item_of_items = []
-    for item in manufactures:
-        item = [int(row[4]) for row in table if row[2] == item]
-        item_of_items.append(item) 
+    manufactures = list(set([row[2] for row in table]))
+    item_of_items = [[int(row[4]) for row in table if row[2] == item] for item in manufactures]
     avg_durability = []
     for listofavg in item_of_items:
         suma = 0
+        count = 0
         for elem in listofavg:
             suma += elem
-            suma = suma / len(listofavg)
-        avg_durability.append(suma)
+            count += 1
+        avg_durability.append(suma/count)
     result = {manufactures[i]: avg_durability[i] for i in range (0, len(manufactures))}
     return result
+
