@@ -101,8 +101,8 @@ def add(table):
     """
 
     user_input = ui.get_inputs(['month', 'day', 'year', 'type', ' amount'],"Please provide information")
-    while (common.is_number(user_input[0]) is False or common.is_number(user_input[2]) is False or
-        common.is_number(user_input[3]) is False or common.is_number(user_input[4]) is False):
+    while common.is_number(user_input[0]) is False or common.is_number(user_input[2]) is False
+        or common.is_number(user_input[3]) is False or common.is_number(user_input[4]) is False:
         ui.print_error_message('Error: Price and Stock value must be numbers')
         user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'],"Please provide information")
         continue

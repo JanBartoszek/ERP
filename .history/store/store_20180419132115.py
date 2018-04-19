@@ -89,15 +89,14 @@ def add(table):
         Table with a new record
     """
     labels = ['Title', 'manufacturer', 'price', 'in_stock']
-    Price = 2
-    In_stock = 3
-    user_inp = common.check_user_inp_2num(labels, Price, In_stock)
+
+    user_inp = common.check_user_inp(labels)
     
-    # user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
-    # while common.is_number(user_input[2]) is False or common.is_number(user_input[3]) is False:
-    #     ui.print_error_message('Error: Price and Stock value must be numbers')
-    #     user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
-    #     continue
+    user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
+    while common.is_number(user_input[2]) is False or common.is_number(user_input[3]) is False:
+        ui.print_error_message('Error: Price and Stock value must be numbers')
+        user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
+        continue
     new_id = common.generate_random(table)
     new_record = [new_id] + user_inp
     table += [new_record]

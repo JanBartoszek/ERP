@@ -42,17 +42,17 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
+                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
+                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
                 update(table, id_)
             elif option == "5":
                 result = get_counts_by_manufacturers(table)
                 label = '\nManufacturers with number of their different titles in shop:\n'
                 ui.print_result(result, label)
             elif option == "6":
-                manufacturer = ui.get_inputs(["\nPlease enter manufacturer:\n"], "")[0]
+                manufacturer = ui.get_inputs(["\nPlease enter manufacturer:\n"],"")[0]
                 result = get_average_by_manufacturer(table, manufacturer)
                 label = "Average number of games by {} in shop:".format(manufacturer)
                 ui.print_result(result, label)
@@ -88,23 +88,17 @@ def add(table):
     Returns:
         Table with a new record
     """
-    labels = ['Title', 'manufacturer', 'price', 'in_stock']
-    Price = 2
-    In_stock = 3
-    user_inp = common.check_user_inp_2num(labels, Price, In_stock)
     
-    # user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
-    # while common.is_number(user_input[2]) is False or common.is_number(user_input[3]) is False:
-    #     ui.print_error_message('Error: Price and Stock value must be numbers')
-    #     user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
-    #     continue
+    user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
+    while common.is_number(user_input[2]) and common.is_number([3]) is True:
+        ui.print_error_message('Error: Price and Stock value must be numbers')
+        user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
+        continue
     new_id = common.generate_random(table)
-    new_record = [new_id] + user_inp
-    table += [new_record]
+    new_record = [new_id] + user_input
+    table += [new_record] 
     data_manager.write_table_to_file('store/games.csv', table)
     return table
-
-
 
 
 def remove(table, id_):
@@ -137,7 +131,7 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'], "Please provide information")
+    user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'],"Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:

@@ -48,28 +48,27 @@ def check_length(user_inp):
 
 
 # def check_user_inp(labels, check_function):
-def check_user_inp_2num(labels, index1, index2):
+def check_user_inp(labels,i):
         user_inp = []
         for item in labels:
             acceptable_inp = False
             while acceptable_inp is False:
                 user_single_inp = ui.get_inputs([item], "Please provide information")
                 if check_length(user_single_inp) is not False:
-                    if item == labels[index1] or item == labels[index2]:
-                        if is_number(*user_single_inp) is True:
+                    if item == labels[i]:
+                        print(item)
+                        print(labels[i])
+                        if is_number(user_single_inp) is True:
                             user_inp.append(*user_single_inp)
                             acceptable_inp = True
                         else: 
                             acceptable_inp = False
-                            continue
                     user_inp.append(*user_single_inp)
                     acceptable_inp = True
                 # if item == in range(2, 4):
 
         return user_inp
 def is_number(number_text):
-    print(number_text)
-    print(type(number_text))
     try:
         int(number_text)
         return True

@@ -38,7 +38,7 @@ def start_module():
                         "Update",
                         "Get_available_items",
                         "Get_average_durability_by_manufacturers"]
-
+    
         ui.print_menu("Inventory", list_options, "Back to main")
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -49,23 +49,24 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
+                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
+                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
                 update(table, id_)
             elif option == "5":
-                label = 'Available items'
-                table = get_available_items(table)
+                label='Available items'
+                table=get_available_items(table)
                 ui.print_result('', label)
-                if table == []:
+                if table==[]:
                     ui.print_error_message('All items are overdue')
                 else:
                     show_table(table)
             elif option == "6":
-                label = 'Avarge durability'
-                result = get_average_durability_by_manufacturers(table)
+                label='Avarge durability'
+                result=get_average_durability_by_manufacturers(table)
                 ui.print_result(result, label)
+                
             elif option == "0":
                 break
             else:
@@ -87,8 +88,8 @@ def show_table(table):
     """
 
     # your code
-    title_list = ['id_', 'name', 'manufacturer', 'purchase_date', 'durability']
-
+    title_list = ['id_', 'name', 'manufacturer', 'purchase_date', 'durability',]
+    
     ui.print_table(table, title_list)
     pass
 
@@ -105,20 +106,10 @@ def add(table):
     """
 
     # your code
-    '''user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'],"Please provide your personal information")
+    user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'],"Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
     table += [new_record] 
-    data_manager.write_table_to_file('inventory/inventory.csv', table)
-    return table'''
-    user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'],"Please provide information")
-    while common.is_number(user_input[2]) is False or common.is_number(user_input[3]) is False:
-        ui.print_error_message('Error: Price and Stock value must be numbers')
-        user_input = ui.get_inputs(['Title', 'manufacturer', 'purchase_date', 'durability'],"Please provide information")
-        continue
-    new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
-    table += [new_record]
     data_manager.write_table_to_file('inventory/inventory.csv', table)
     return table
 
@@ -206,5 +197,6 @@ def get_average_durability_by_manufacturers(table):
             suma += elem
             count += 1
         avg_durability.append(suma/count)
-    result = {manufactures[i]: avg_durability[i] for i in range(0, len(manufactures))}
+    result = {manufactures[i]: avg_durability[i] for i in range (0, len(manufactures))}
     return result
+

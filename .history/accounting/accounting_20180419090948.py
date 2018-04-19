@@ -100,24 +100,13 @@ def add(table):
         Table with a new record
     """
 
-    user_input = ui.get_inputs(['month', 'day', 'year', 'type', ' amount'],"Please provide information")
-    while (common.is_number(user_input[0]) is False or common.is_number(user_input[2]) is False or
-        common.is_number(user_input[3]) is False or common.is_number(user_input[4]) is False):
-        ui.print_error_message('Error: Price and Stock value must be numbers')
-        user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'],"Please provide information")
-        continue
-    new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
-    table += [new_record] 
-    data_manager.write_table_to_file('accounting/items.csv', table)
-    return table
     # your code
-    '''user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'], "Please provide your personal information")
+    user_input = ui.get_inputs(['month', 'day', 'year', 'type', 'amount'], "Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
     table += [new_record]
     data_manager.write_table_to_file('accounting/items.csv', table)
-    return table'''
+    return table
 
 
 def remove(table, id_):
