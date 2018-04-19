@@ -111,13 +111,12 @@ def add(table):
     table += [new_record] 
     data_manager.write_table_to_file('inventory/inventory.csv', table)
     return table'''
-    user_input = ui.get_inputs(['name', 'manufacturer', 'purchase_date', 'durability'],"Please provide information")
-    while common.is_number(user_input[2]) is False or common.is_number(user_input[3]) is False:
-        ui.print_error_message('Error: Price and Stock value must be numbers')
-        user_input = ui.get_inputs(['Title', 'manufacturer', 'purchase_date', 'durability'],"Please provide information")
-        continue
+    labels = ['name', 'manufacturer', 'purchase_date', 'durability']
+    purchase_date = 2
+    durability = 3
+    user_inp = common.check_user_inp_2num(labels, purchase_date, durability)
     new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
+    new_record = [new_id] + user_inp
     table += [new_record]
     data_manager.write_table_to_file('inventory/inventory.csv', table)
     return table

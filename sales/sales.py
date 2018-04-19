@@ -108,9 +108,14 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['title', 'price', 'month', 'day', 'year'], "Please provide your personal information")
+    labels = ['title', 'price', 'month', 'day', 'year']
+    price = 1
+    month = 2
+    day = 3
+    year = 4
+    user_inp = common.check_user_inp_4num(labels, price, month, day, year)
     new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
+    new_record = [new_id] + user_inp
     table += [new_record]
     data_manager.write_table_to_file('sales/sales.csv', table)
     return table

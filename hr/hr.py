@@ -97,9 +97,11 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'birth_date'], "Please provide your personal information")
+    labels = ['name', 'birth_date']
+    birth_date = 1
+    user_inp = common.check_user_inp_1num(labels, birth_date)
     new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
+    new_record = [new_id] + user_inp
     table += [new_record]
     data_manager.write_table_to_file('hr/persons.csv', table)
     return table
