@@ -187,12 +187,9 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     # your code
     try:
-        int(year_from)
-        int(month_from)
-        int(day_from)
-        int(year_to)
-        int(month_to)
-        int(day_to)
+        dates = [month_from, day_from, year_from, month_to, day_to, year_to]
+        for date in dates:
+            date = int(date)
     except ValueError:
         return ui.print_error_message("Please try again and enter numbers representing date of interest.")
 
