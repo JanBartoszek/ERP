@@ -68,8 +68,7 @@ def check_user_inp_2num(labels, index1, index2):
 
         return user_inp
 def is_number(number_text):
-    print(number_text)
-    print(type(number_text))
+    
     try:
         int(number_text)
         return True
