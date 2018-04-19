@@ -1,6 +1,7 @@
 # implement commonly used functions here
 
 import random
+import ui
 
 
 # generate and return a unique and random string
@@ -37,3 +38,25 @@ def generate_random(table):
 
     if contain is False:
         return generated
+
+
+def check_length(user_inp):
+    for item in user_inp:
+        if len(item) > 30:
+            ui.print_error_message("\nInput too long!\n")
+            return False
+
+
+# def check_user_inp(labels, check_function):
+def check_user_inp(labels):
+        user_inp = []
+        for item in labels:
+            acceptable_inp = False
+            while acceptable_inp is False:
+                user_single_inp = ui.get_inputs([item], "Please provide information")
+                if check_length(user_single_inp) is not False:
+                    user_inp.append(*user_single_inp)
+                    acceptable_inp = True
+                # if item == in range(2, 4):
+
+        return user_inp

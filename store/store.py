@@ -88,12 +88,16 @@ def add(table):
     Returns:
         Table with a new record
     """
-    user_input = ui.get_inputs(['Title', 'manufacturer', 'price', 'in_stock'], "Please provide information")
+    labels = ['Title', 'manufacturer', 'price', 'in_stock']
+
+    user_inp = common.check_user_inp(labels)
     new_id = common.generate_random(table)
-    new_record = [new_id] + user_input
+    new_record = [new_id] + user_inp
     table += [new_record]
     data_manager.write_table_to_file('store/games.csv', table)
     return table
+
+
 
 
 def remove(table, id_):
