@@ -24,14 +24,12 @@ def print_table(table, title_list):
         next_line = [str(col) for col in line]
         List_for_print.append(next_line)
 
-
     Max_row = [max(map(len, col)) for col in zip(*List_for_print)]
     Full_lenght = '+'
     for all in range(len(Max_row)):
         Full_lenght += ((Max_row[all]+margin)*'-'+'+')
     print(Full_lenght)
 
-    
     for line in List_for_print:
         output = '|'
         for col in range(len(line)):
@@ -56,19 +54,18 @@ def print_result(result, label):
     print('\n'+str(label)+':')
     if isinstance(result, dict):
         for keys in result:
-            print (keys, result[keys])
+            print(keys, result[keys])
     elif isinstance(result, list):
         if isinstance(result[0], list):
             print_table(result[1:], result[0])
         else:
             for elem in result:
-                print (elem)
+                print(elem)
     elif isinstance(result, (int or float or str)):
         print(result)
     else:
         print(result)
     print('')
-    
 
     pass
 
@@ -97,10 +94,11 @@ def print_menu(title, list_options, exit_message):
     # your code
 
     print(title)
-    for i in range(0,len(list_options)):
-        print((i+1),') ',list_options[i])
+    for i in range(0, len(list_options)):
+        print((i+1), ') ', list_options[i])
     print('0 ) ', exit_message)
     pass
+
 
 def get_inputs(list_labels, title):
     """

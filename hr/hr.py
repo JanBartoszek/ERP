@@ -33,7 +33,7 @@ def start_module():
                         "Update",
                         "Get_oldest_person",
                         "Get_persons_closest_to_average"]
-    
+
         ui.print_menu("Human resources manager", list_options, "Back to main")
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -44,18 +44,18 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 update(table, id_)
             elif option == "5":
-                label='Oldest person'
-                result=get_oldest_person(table)
+                label = 'Oldest person'
+                result = get_oldest_person(table)
                 ui.print_result(result, label)
             elif option == "6":
-                label='Person closest to avarge'
-                result=get_persons_closest_to_average(table)
+                label = 'Person closest to avarge'
+                result = get_persons_closest_to_average(table)
                 ui.print_result(result, label)
             elif option == "0":
                 break
@@ -80,7 +80,7 @@ def show_table(table):
 
     # your code
     title_list = ['id_', 'name', 'birth_date']
-    
+
     ui.print_table(table, title_list)
     pass
 
@@ -97,10 +97,10 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'birth_date'],"Please provide your personal information")
+    user_input = ui.get_inputs(['name', 'birth_date'], "Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
-    table += [new_record] 
+    table += [new_record]
     data_manager.write_table_to_file('hr/persons.csv', table)
     return table
 
@@ -139,7 +139,7 @@ def update(table, id_):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'birth_date'],"Please provide information")
+    user_input = ui.get_inputs(['name', 'birth_date'], "Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:
@@ -163,7 +163,7 @@ def get_oldest_person(table):
         if int(person[2]) == int(current_oldest):
             result.append(person[1])
     return result
-        
+
     # your code
 
     pass
@@ -183,7 +183,7 @@ def get_persons_closest_to_average(table):
     for person in table:
         diff = average-int(person[2])
         if diff < 0:
-            diff =- diff
+            diff = -diff
         else:
             pass
         if diff < smallest_diff:

@@ -22,7 +22,7 @@ def generate_random(table):
     """
 
     # your code
-    a = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')for _ in range(2)) 
+    a = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')for _ in range(2))
     b = ''.join(random.choice('abcdefghijklmnopqrstuvwxyz')for _ in range(2))
     c = ''.join(random.choice('1234567890')for _ in range(2))
     d = ''.join(random.choice('!@#$%^&*()+-=}{|[]\:"<>?/.,')for _ in range(2))

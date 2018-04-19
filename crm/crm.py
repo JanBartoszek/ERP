@@ -34,7 +34,7 @@ def start_module():
                         "Update",
                         "Get_longest_name_id",
                         "Get_subscribed_emails"]
-    
+
         ui.print_menu("Customers", list_options, "Back to main")
         try:
             inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -45,10 +45,10 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(["id_"],"Enter record id")[0]
+                id_ = ui.get_inputs(["id_"], "Enter record id")[0]
                 update(table, id_)
             elif option == "5":
                 result = get_longest_name_id(table)
@@ -80,7 +80,7 @@ def show_table(table):
 
     # your code
     title_list = ['id_', 'name', 'email', 'subscribed']
-    
+
     ui.print_table(table, title_list)
     pass
 
@@ -97,10 +97,10 @@ def add(table):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'email', 'subscribed'],"Please provide your personal information")
+    user_input = ui.get_inputs(['name', 'email', 'subscribed'], "Please provide your personal information")
     new_id = common.generate_random(table)
     new_record = [new_id] + user_input
-    table += [new_record] 
+    table += [new_record]
     data_manager.write_table_to_file('crm/customers.csv', table)
     return table
 
@@ -139,7 +139,7 @@ def update(table, id_):
     """
 
     # your code
-    user_input = ui.get_inputs(['name', 'email', 'subscribed'],"Please provide information")
+    user_input = ui.get_inputs(['name', 'email', 'subscribed'], "Please provide information")
     for item1 in table:
         for item2 in item1:
             if item2 == id_:
@@ -164,17 +164,17 @@ def get_longest_name_id(table):
             longest_name_entries.append(item)
         elif len(item[1]) == len(longest_name_entries[0][1]):
             longest_name_entries.append(item)
-    
+
     longest_names = []
     for item in longest_name_entries:
         longest_names.append(item[1])
-    
+
     longest_name = min(longest_names)
-    
+
     for item in longest_name_entries:
         if item[1] == longest_name:
             result = item[0]
-    
+
     return result
 
 
