@@ -49,12 +49,12 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 result = get_counts_by_manufacturers(table)
-                label = '\nManufacturers with number of their different titles in shop:\n'
+                label = '\nManufacturers with number of their different titles in shop'
                 ui.print_result(result, label)
             elif option == "6":
                 manufacturer = ui.get_inputs(["\nPlease enter manufacturer:\n"], "")[0]
                 result = get_average_by_manufacturer(table, manufacturer)
-                label = "Average number of games by {} in shop:".format(manufacturer)
+                label = "Average number of games by {} in shop".format(manufacturer)
                 ui.print_result(result, label)
             elif option == "0":
                 break
@@ -103,8 +103,6 @@ def add(table):
     table += [new_record]
     data_manager.write_table_to_file('store/games.csv', table)
     return table
-
-
 
 
 def remove(table, id_):
@@ -171,5 +169,7 @@ def get_average_by_manufacturer(table, manufacturer):
             if item2 == manufacturer:
                 counter1 += 1
                 counter2 += int(item1[4])
+    if counter1 == 0:
+        return "There is no \"{}\" manufacturer in store data.".format(manufacturer)
     result = counter2 / counter1
     return result

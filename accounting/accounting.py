@@ -57,7 +57,7 @@ def start_module():
                 label = "Highest profit year"
                 ui.print_result(result, label)
             elif option == "6":
-                year = ui.get_inputs(["Enter year"], "")[0]
+                year = ui.get_inputs(["Enter year:"], "")[0]
                 result = avg_amount(table, year)
                 label = "Average profit per item in given year"
                 ui.print_result(result, label)
@@ -212,11 +212,16 @@ def avg_amount(table, year):
     # your code
     money = 0
     items_counter = 0
-    for item in table:
-        if int(item[3]) == int(year):
-            items_counter += 1
-            if item[4] == 'in':
-                money += int(item[5])
-            else:
-                money -= int(item[5])
+    try:
+        for item in table:
+            if int(item[3]) == int(year):
+                items_counter += 1
+                if item[4] == 'in':
+                    money += int(item[5])
+                else:
+                    money -= int(item[5])
+    except ValueError:
+        return ui.print_error_message("Please try again and enter a number representing year of interest.")
+    if items_counter == 0:
+        return "There are no records for year {}".format(year)
     return money/items_counter

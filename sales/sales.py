@@ -54,7 +54,7 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 result = get_lowest_price_item_id(table)
-                label = "Id of the item that was sold for the lowest price is: "
+                label = "Id of the item that was sold for the lowest price is"
                 ui.print_result(result, label)
             elif option == "6":
                 input1 = ui.get_inputs(["month", "day", "year"], "Enter first date")
@@ -67,7 +67,7 @@ def start_module():
                 year_to = input2[2]
 
                 result = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
-                label = "Items sold between dates: "
+                label = "Items sold between dates"
                 ui.print_result(result, label)
             elif option == "0":
                 break
@@ -186,8 +186,17 @@ def get_lowest_price_item_id(table):
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     # your code
-    table_from_to = []
+    try:
+        int(year_from)
+        int(month_from)
+        int(day_from)
+        int(year_to)
+        int(month_to)
+        int(day_to)
+    except ValueError:
+        return ui.print_error_message("Please try again and enter numbers representing date of interest.")
 
+    table_from_to = []
     for item in table:
         if int(item[5]) > int(year_from):
             table_from_to.append(item)
@@ -197,19 +206,23 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
             elif int(item[3]) == int(month_from):
                 if int(item[4]) > int(day_from):
                     table_from_to.append(item)
-
+    
+    table_from_to2 = []
     for item in table_from_to:
-        if int(item[5]) > int(year_to):
-            table_from_to.remove(item)
+        if int(item[5]) < int(year_to):
+            table_from_to2.append(item)
         elif int(item[5]) == int(year_to):
-            if int(item[3]) > int(month_to):
-                table_from_to.remove(item)
+            if int(item[3]) < int(month_to):
+                table_from_to2.append(item)
             elif int(item[3]) == int(month_to):
-                if int(item[4]) >= int(day_to):
-                    table_from_to.remove(item)
+                if int(item[4]) < int(day_to):
+                    table_from_to2.append(item)
 
-    for list1 in table_from_to:
+    if len(table_from_to2) == 0:
+        return "There are no items sold between given dates."
+
+    for list1 in table_from_to2:
         for i in range(2, 6):
             list1[i] = int(list1[i])
 
-    return table_from_to
+    return table_from_to2
